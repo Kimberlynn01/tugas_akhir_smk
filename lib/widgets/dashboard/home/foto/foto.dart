@@ -148,15 +148,13 @@ class _ItemFotoScreenState extends State<ItemFotoScreen> {
           return SizedBox(
             height: MediaQuery.of(context).size.height,
             child: Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
               children: snapshot.data!.map((foto) {
                 final formattedDate =
                     DateFormat.yMMMd().format(foto.tanggalUnggah);
                 final isOwner = isCurrentUserOwner(foto.userId.username);
                 return SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: 371,
+                  height: 400,
                   child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.blueGrey,
@@ -199,9 +197,16 @@ class _ItemFotoScreenState extends State<ItemFotoScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                'Post by:${foto.userId.username}',
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey),
+                              ),
+                              Text(
                                 foto.judulFoto,
                                 style: const TextStyle(
-                                    fontSize: 17,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -216,58 +221,72 @@ class _ItemFotoScreenState extends State<ItemFotoScreen> {
                             ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                toggleisLikeFoto(foto, widget.userId);
-                              },
-                              icon: FutureBuilder<LikeStatus?>(
-                                future: Hive.openBox<LikeStatus>('likeBox')
-                                    .then((box) => box.get(foto.id.toString() +
-                                        widget.userId.toString())),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.white,
-                                    );
-                                  } else if (snapshot.hasData &&
-                                      snapshot.data!.isLiked) {
-                                    return const Icon(
-                                      Icons.favorite,
-                                      color: Colors.pink,
-                                    );
-                                  } else {
-                                    return const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.white,
-                                    );
-                                  }
-                                },
+                        Padding(
+                          padding: const EdgeInsets.only(left: 9),
+                          child: Row(
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      toggleisLikeFoto(foto, widget.userId);
+                                    },
+                                    child: FutureBuilder<LikeStatus?>(
+                                      future:
+                                          Hive.openBox<LikeStatus>('likeBox')
+                                              .then((box) => box.get(foto.id
+                                                      .toString() +
+                                                  widget.userId.toString())),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Icon(
+                                            Icons.favorite_border,
+                                            color: Colors.white,
+                                          );
+                                        } else if (snapshot.hasData &&
+                                            snapshot.data!.isLiked) {
+                                          return const Icon(
+                                            Icons.favorite,
+                                            color: Colors.pink,
+                                          );
+                                        } else {
+                                          return const Icon(
+                                            Icons.favorite_border,
+                                            color: Colors.white,
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Text(
+                                    foto.like.toString(),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  showModalComment(foto, widget.user);
-                                },
-                                icon: const Icon(
-                                  Icons.comment_outlined,
-                                  color: Colors.white,
-                                )),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            const Spacer(),
-                            Text(
-                              formattedDate,
-                              style: const TextStyle(color: Colors.grey),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                          ],
+                              IconButton(
+                                  onPressed: () {
+                                    showModalComment(foto, widget.user);
+                                  },
+                                  icon: const Icon(
+                                    Icons.comment_outlined,
+                                    color: Colors.white,
+                                  )),
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              const Spacer(),
+                              Text(
+                                formattedDate,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
