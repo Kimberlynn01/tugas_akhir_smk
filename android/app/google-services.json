@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "325171143945",
+    "firebase_url": "https://tugas-akhir-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tugas-akhir-sekolah",
+    "storage_bucket": "tugas-akhir-sekolah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325171143945:android:0194ff5c2c3eb5b0f75fd8",
+        "android_client_info": {
+          "package_name": "com.example.tugas_praktek_akhir"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDky8scKnkKPKRkCdSebMx8ggnln-oS18I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
