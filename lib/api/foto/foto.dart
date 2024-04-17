@@ -4,7 +4,6 @@ import '../../models/foto.dart';
 import 'package:http/http.dart' as http;
 
 class FotoApi {
-
   Future<List<Foto>> fetchFoto() async {
     final response = await http.get(
         Uri.parse('https://api-tugas-akhir.vercel.app/api/v1/foto?auth=123'));
@@ -15,5 +14,4 @@ class FotoApi {
       throw Exception('Failed to load foto ${response.body}');
     }
   }
-
 }

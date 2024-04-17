@@ -154,8 +154,9 @@ class _ItemFotoScreenState extends State<ItemFotoScreen> {
                 final isOwner = isCurrentUserOwner(foto.userId.username);
                 return SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: 400,
+                  height: 419,
                   child: Container(
+                    margin: const EdgeInsets.only(top: 15),
                     decoration: const BoxDecoration(
                         color: Colors.blueGrey,
                         borderRadius: BorderRadius.all(Radius.circular(5))),
